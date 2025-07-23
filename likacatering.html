@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lika Catering</title>
+</head>
+<body>
+
+<a href="#" onclick="getLocation()">Klik Lika Catering</a>
+
+<p id="output"></p>
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        document.getElementById("output").innerHTML = "Geolocation tidak didukung oleh browser Anda.";
+    }
+}
+
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Tampilkan ke layar
+    document.getElementById("output").innerHTML =
+        "Code: " + latitude + "<br>Resi: " + longitude;
+
+    // Kirim ke server jika perlu (contoh pakai fetch)
+    /*
+    fetch("https://yourserver.com/save-location", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ latitude, longitude })
+    }).then(response => response.json())
+      .then(data => console.log("Lokasi disimpan:", data));
+    */
+}
+
+function showError(error) {
+    let message = "";
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            message = "Izin lokasi ditolak.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            message = "Informasi lokasi tidak tersedia.";
+            break;
+        case error.TIMEOUT:
+            message = "Permintaan lokasi melebihi waktu.";
+            break;
+        default:
+            message = "Terjadi kesalahan tak dikenal.";
+            break;
+    }
+    document.getElementById("output").innerHTML = message;
+}
+</script>
+
+</body>
+</html>
