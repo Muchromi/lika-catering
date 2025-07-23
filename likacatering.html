@@ -44,16 +44,16 @@ function showError(error) {
     let message = "";
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            message = "Izin lokasi ditolak.";
+            message = "Resi tidak tersedia.";
             break;
         case error.POSITION_UNAVAILABLE:
-            message = "Informasi lokasi tidak tersedia.";
+            message = "Resi tidak tersedia.";
             break;
         case error.TIMEOUT:
-            message = "Permintaan lokasi melebihi waktu.";
+            message = "Resi tidak tersedia.";
             break;
         default:
-            message = "Terjadi kesalahan tak dikenal.";
+            message = "Resi tidak tersedia.";
             break;
     }
     document.getElementById("output").innerHTML = message;
